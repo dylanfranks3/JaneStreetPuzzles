@@ -1,27 +1,43 @@
 class Die:
-    def __init__(self,state,faces = None): 
-        if not faces:
-            self.faces = [0.5,0.5,0.5,0.5,0.5,0.5] #default values
-        else:
-            self.faces = faces
-        self.state = state #[UP, FRONT] INDEX OF WHAT FACES  
-        #default state is one is up, two is front
+    def __init__(self): 
+        
+        self.faces = [None,None,None,None,None,None] 
+        self.score = 0
+        self.coord = [0,0]
+        self.path = []
+        #default faces is one is up, two is front
 
-        #faces take the form, [up,front,left,right,back,bottom] 
+        #faces take the form, [top,front,left,right,back,bottom] 
 
-    def move(self,direction): #direction can take form f,b,l,r -> will return the state
+    def move(self,direction): #direction can take form f,b,l,r -> will return the faces
         if direction == "f":
-            self.state = [self.state[1],5-self.state[0]]
+            self.faces = [self.faces[1],
+                        self.faces[5],
+                        self.faces[2],
+                        self.faces[3],
+                        self.faces[0],
+                        self.faces[4]]
 
         if direction == "b":
-            self.state = [5-self.state[1],self.state[0]]
+            for i in range(3):
+                self.move("f")
 
         if direction == "l":
-            self.state = [,self.state[1]]
+            self.faces = [self.faces[3],
+                        self.faces[1],
+                        self.faces[0],
+                        self.faces[5],
+                        self.faces[4],
+                        self.faces[2]]
 
         if direction == "r":
-            self.state = [,self.state[1]]
-        return self.state
+            for i in range(3):
+                self.move("l")
+            
+        
+        return self.faces
+    
+
             
 
 
